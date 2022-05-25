@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import styles from './Input.module.scss';
+import styles from "./Input.module.scss";
 
 interface InputProps {
   inputName: string;
@@ -9,13 +9,18 @@ interface InputProps {
   isDisabled: boolean;
 }
 
-const Input: React.FC<InputProps> = ({inputName, content, type, isDisabled}) => {
+const Input: React.FC<InputProps> = ({
+  inputName,
+  content,
+  type,
+  isDisabled,
+}) => {
   return (
     <div className={styles.wrapper}>
       <p>{inputName}</p>
-      <input type={type} defaultValue={content} disabled={isDisabled}/>
+      <input type={type} defaultValue={content} disabled={isDisabled} />
     </div>
-  )
-}
+  );
+};
 
-export default Input
+export default Input;

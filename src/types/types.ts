@@ -7,10 +7,10 @@ interface ICompany {
 }
 
 export interface IUser {
-  id: number,
-  name: string,
-  address: IAddress,
-  company: ICompany
+  id: number;
+  name: string;
+  address: IAddress;
+  company: ICompany;
 }
 
 interface IAdressProfile {

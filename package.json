@@ -13,6 +13,7 @@
     "axios": "^0.27.2",
     "eslint-plugin-react-hooks": "^4.6.0-next-7d9e17a98-20220511",
     "node-sass": "^7.0.1",
+    "prettier": "^2.6.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-router-dom": "^6.3.0",
