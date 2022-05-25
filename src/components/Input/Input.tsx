@@ -9,13 +9,13 @@ interface InputProps {
   isDisabled: boolean;
 }
 
-const Input: React.FC<InputProps> = ({inputName, content, type, isDisabled}) => {
+const Input: React.FC<InputProps> = ({ inputName, content, type, isDisabled }) => {
   return (
     <div className={styles.wrapper}>
       <p>{inputName}</p>
-      <input type={type} defaultValue={content} disabled={isDisabled}/>
+      <input type={type} defaultValue={content} disabled={isDisabled} />
     </div>
-  )
-}
+  );
+};
 
-export default Input
+export default Input;
