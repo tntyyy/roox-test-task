@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import Input from "../../components/Input/Input";
+import Input from '../../components/Input/Input';
 
-import { IUserProfile } from "../../types/types";
+import { IUserProfile } from '../../types/types';
 
-import styles from "./UserProfile.module.scss";
+import styles from './UserProfile.module.scss';
 
 interface UserProfileProps {
   user: IUserProfile | null;
@@ -22,24 +22,14 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
             <button onClick={() => setDisabled(false)}>Редактировать</button>
           </header>
           <div className={styles.content}>
-            <Input
-              isDisabled={isDisabled}
-              inputName="Name"
-              content={user.name}
-              type="text"
-            />
+            <Input isDisabled={isDisabled} inputName="Name" content={user.name} type="text" />
             <Input
               isDisabled={isDisabled}
               inputName="Username"
               content={user.username}
               type="text"
             />
-            <Input
-              isDisabled={isDisabled}
-              inputName="E-mail"
-              content={user.email}
-              type="email"
-            />
+            <Input isDisabled={isDisabled} inputName="E-mail" content={user.email} type="email" />
             <Input
               isDisabled={isDisabled}
               inputName="Street"
@@ -58,24 +48,9 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
               content={user.address.zipcode}
               type="text"
             />
-            <Input
-              isDisabled={isDisabled}
-              inputName="Phone"
-              content={user.phone}
-              type="text"
-            />
-            <Input
-              isDisabled={isDisabled}
-              inputName="Website"
-              content={user.website}
-              type="text"
-            />
-            <Input
-              isDisabled={isDisabled}
-              inputName="Comment"
-              content=""
-              type="textarea"
-            />
+            <Input isDisabled={isDisabled} inputName="Phone" content={user.phone} type="text" />
+            <Input isDisabled={isDisabled} inputName="Website" content={user.website} type="text" />
+            <Input isDisabled={isDisabled} inputName="Comment" content="" type="textarea" />
           </div>
           <button>Отправить</button>
         </div>

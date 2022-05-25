@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import User from "../User/User";
-import { IUser } from "../../types/types";
+import User from '../User/User';
+import { IUser } from '../../types/types';
 
-import styles from "./UserList.module.scss";
+import styles from './UserList.module.scss';
 
 interface UserListProps {
   users: IUser[];
@@ -14,7 +14,7 @@ const UserList: React.FC<UserListProps> = ({ users, getId }) => {
   return (
     <div className={styles.wrapper}>
       <h1>Список пользователей</h1>
-      {users.map((user) => (
+      {users.map(user => (
         <User user={user} key={user.id} getId={getId} />
       ))}
     </div>

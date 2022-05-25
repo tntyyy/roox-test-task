@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./Sort.module.scss";
+import React from 'react';
+import styles from './Sort.module.scss';
 
 interface SortProps {
   filterByCity: () => void;
