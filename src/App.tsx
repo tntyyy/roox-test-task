@@ -63,9 +63,16 @@ function App() {
 
   return (
     <div className={styles.wrapper}>
-      <Sort filterByCity={filterByCity} filterByCompany={filterByCompany} />
       <Routes>
-        <Route path="/" element={<UserList users={users} getId={getIdFromUser} />} />
+        <Route
+          path="/"
+          element={
+            <>
+              <Sort filterByCity={filterByCity} filterByCompany={filterByCompany} />
+              <UserList users={users} getId={getIdFromUser} />
+            </>
+          }
+        />
         <Route path="/userprofile" element={<UserProfile user={userProfile} />} />
       </Routes>
     </div>
