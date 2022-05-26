@@ -4,15 +4,16 @@ import { ITodo } from '../../types/types';
 import Todo from '../Todo/Todo';
 
 interface TodoListProps {
-  userId: number;
   todos: ITodo[];
 }
 
-const TodoList: React.FC<TodoListProps> = ({ userId, todos }) => {
+const TodoList: React.FC<TodoListProps> = ({ todos }) => {
   return (
     <div>
       <h1>Задачи пользователя</h1>
-      {todos.map(todo => (userId == todo.userId ? <Todo todo={todo} key={todo.id} /> : ''))}
+      {todos.map(todo => (
+        <Todo todo={todo} key={todo.id} />
+      ))}
     </div>
   );
 };
