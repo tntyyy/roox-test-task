@@ -29,37 +29,37 @@ function App() {
   };
 
   React.useEffect(() => {
+    async function getProfileUser(id: number) {
+      try {
+        const response = await axios.get<IUserProfile[]>(
+          `https://jsonplaceholder.typicode.com/users?id=${id}`
+        );
+        setUserProfile(response.data[0]);
+      } catch (error) {
+        alert(error);
+      }
+    }
+
     if (userId > 0) {
       getProfileUser(userId);
-      console.log(userProfile);
     }
   }, [userId]);
 
   React.useEffect(() => {
+    async function getUsers() {
+      try {
+        const response = await axios.get<IUser[]>('https://jsonplaceholder.typicode.com/users');
+        if (response.data.length) {
+          setUsers(response.data);
+        }
+      } catch (error) {
+        alert(error);
+      }
+    }
+
     getUsers();
   }, []);
 
-  async function getUsers() {
-    try {
-      const response = await axios.get<IUser[]>('https://jsonplaceholder.typicode.com/users');
-      if (response.data.length) {
-        setUsers(response.data);
-      }
-    } catch (error) {
-      alert(error);
-    }
-  }
-
-  async function getProfileUser(id: number) {
-    try {
-      const response = await axios.get<IUserProfile[]>(
-        `https://jsonplaceholder.typicode.com/users?id=${id}`
-      );
-      setUserProfile(response.data[0]);
-    } catch (error) {
-      alert(error);
-    }
-  }
 
   return (
     <div className={styles.wrapper}>

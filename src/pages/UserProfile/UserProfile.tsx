@@ -17,23 +17,23 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
   const [isDisabled, setDisabled] = React.useState(true);
   const [todos, setTodos] = React.useState<ITodo[]>([]);
 
-  async function getTodos() {
-    try {
-      const response = await axios.get<ITodo[]>(
-        `https://jsonplaceholder.typicode.com/todos?userId=${user?.id}`
-      );
-      if (response.data?.length) {
-        setTodos(response.data);
-        console.log(todos);
-      }
-    } catch (error) {
-      alert(error);
-    }
-  }
-
   React.useEffect(() => {
+    async function getTodos() {
+      try {
+        const response = await axios.get<ITodo[]>(
+          `https://jsonplaceholder.typicode.com/todos?userId=${user?.id}`
+        );
+        if (response.data?.length) {
+          setTodos(response.data);
+          console.log(todos);
+        }
+      } catch (error) {
+        alert(error);
+      }
+    }
+
     getTodos();
-  }, []);
+  }, [todos, user?.id]);
 
   if (user !== null) {
     return (
