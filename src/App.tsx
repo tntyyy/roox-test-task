@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import UserList from './components/UserList/UserList';
 import Sort from './components/Sort/Sort';
+import Spinner from './components/Spinner/Spinner';
 
 import UserProfile from './pages/UserProfile/UserProfile';
 
@@ -15,6 +16,7 @@ function App() {
   const [users, setUsers] = React.useState<IUser[]>([]);
   const [userProfile, setUserProfile] = React.useState<IUserProfile | null>(null);
   const [userId, setUserId] = React.useState(0);
+  const [fetchStatus, setFetchStatus] = React.useState<'loading' | 'success' | 'error'>('loading');
 
   const filterByCity = () => {
     setUsers([...users].sort((a, b) => (a.address.city > b.address.city ? 1 : -1)));
@@ -37,6 +39,7 @@ function App() {
         setUserProfile(response.data[0]);
       } catch (error) {
         alert(error);
+        setFetchStatus('error');
       }
     }
 
@@ -51,15 +54,22 @@ function App() {
         const response = await axios.get<IUser[]>('https://jsonplaceholder.typicode.com/users');
         if (response.data.length) {
           setUsers(response.data);
+          setFetchStatus('success');
         }
       } catch (error) {
         alert(error);
+        setFetchStatus('error');
       }
     }
 
     getUsers();
   }, []);
 
+  if (fetchStatus === 'loading') {
+    return (
+      <Spinner />
+    )
+  }
 
   return (
     <div className={styles.wrapper}>
