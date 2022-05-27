@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import UserList from './components/UserList/UserList';
 import Sort from './components/Sort/Sort';
+import Spinner from './components/Spinner/Spinner';
 
 import UserProfile from './pages/UserProfile/UserProfile';
 
@@ -15,6 +16,7 @@ function App() {
   const [users, setUsers] = React.useState<IUser[]>([]);
   const [userProfile, setUserProfile] = React.useState<IUserProfile | null>(null);
   const [userId, setUserId] = React.useState(0);
+  const [fetchStatus, setFetchStatus] = React.useState<'loading' | 'success' | 'error'>('loading');
 
   const filterByCity = () => {
     setUsers([...users].sort((a, b) => (a.address.city > b.address.city ? 1 : -1)));
@@ -29,36 +31,44 @@ function App() {
   };
 
   React.useEffect(() => {
+    async function getProfileUser(id: number) {
+      try {
+        const response = await axios.get<IUserProfile[]>(
+          `https://jsonplaceholder.typicode.com/users?id=${id}`
+        );
+        setUserProfile(response.data[0]);
+      } catch (error) {
+        alert(error);
+        setFetchStatus('error');
+      }
+    }
+
     if (userId > 0) {
       getProfileUser(userId);
-      console.log(userProfile);
     }
   }, [userId]);
 
   React.useEffect(() => {
+    async function getUsers() {
+      try {
+        const response = await axios.get<IUser[]>('https://jsonplaceholder.typicode.com/users');
+        if (response.data.length) {
+          setUsers(response.data);
+          setFetchStatus('success');
+        }
+      } catch (error) {
+        alert(error);
+        setFetchStatus('error');
+      }
+    }
+
     getUsers();
   }, []);
 
-  async function getUsers() {
-    try {
-      const response = await axios.get<IUser[]>('https://jsonplaceholder.typicode.com/users');
-      if (response.data.length) {
-        setUsers(response.data);
-      }
-    } catch (error) {
-      alert(error);
-    }
-  }
-
-  async function getProfileUser(id: number) {
-    try {
-      const response = await axios.get<IUserProfile[]>(
-        `https://jsonplaceholder.typicode.com/users?id=${id}`
-      );
-      setUserProfile(response.data[0]);
-    } catch (error) {
-      alert(error);
-    }
+  if (fetchStatus === 'loading') {
+    return (
+      <Spinner />
+    )
   }
 
   return (
